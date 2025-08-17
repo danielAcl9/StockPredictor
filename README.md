@@ -1,11 +1,11 @@
-/// STOCK PRICE PREDICTION - S&P GLOBAL
+# STOCK PRICE PREDICTION - S&P GLOBAL
 
 The task is to build a model to predict stock prices using the provided datasets. This classic challenge in data science requires to leverage historical data and associated market news.
 
-# Feature Descriptions
+## Feature Descriptions
 
-## news.csv
-### Historical News
+### news.csv
+#### Historical News
 This dataset provides real-time news articles related to specific trading tickers. Each news article includes:
 
 - **datetime**: Timestamp of the news article's publication.
@@ -13,8 +13,8 @@ This dataset provides real-time news articles related to specific trading ticker
 - **headline**: Concise summary of the news article.
 - **summary**: Summarization of the article content.
 
-## price.csv
-### Historical Price Data
+### price.csv
+#### Historical Price Data
 This dataset contains historical price and volume data for various trading tickers. For each ticker, the following information is provided:
 
 - **date**: Trading date.
@@ -27,3 +27,11 @@ This dataset contains historical price and volume data for various trading ticke
 
 ### Problem Description:
 The task involves predicting stock prices based on historical data and corresponding market news. You are required to develop a predictive model from scratch that demonstrates robust performance on unseen data. This assignment will help showcase your modeling skills and your ability to synthesize different data sources in stock price prediction.
+
+
+
+Granularidad = nivel de detalle.
+
+Se necesita porque precios son diarios, noticias son múltiples → hay que unificarlas.
+
+Esto se alinea con la prueba porque es el paso clave de “sintetizar datos heterogéneos”.
