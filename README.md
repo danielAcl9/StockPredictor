@@ -108,3 +108,5 @@ The linear regression outperformed the XGBoost model. The simple news_count feat
 The Linear Regression model successfully followed the overall price trend, performing well during stable periods. However, it struggled to capture sudden, sharp changes in price (e.g., around the 100-time unit mark). Despite these limitations, the baseline model demonstrated that even simple price-derived features can achieve reasonable predictive accuracy.
 
 The results show that a simple linear regression outperforms a more complex XGBoost model in this dataset. While errors remain significant in some cases, the approach demonstrates how integrating market news with price data can help capture stock dynamics.
+
+#### Daniel Fernando Amado Cáceres for S&P Global
