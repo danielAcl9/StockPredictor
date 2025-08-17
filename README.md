@@ -67,6 +67,7 @@ Market news associated with stock tickers.
     - When multiple news articles were published on the same day, they were aggregated.
 
 ### Key insights
+
 A Stock Closing Price Over Time chart revealed the following behavior: From November 2023 to early January 2024, the stock price rose sharply, peaking close to 590. In mid-January, there was a sudden drop, followed by abrupt jumps later in the month. Since February, the price stabilized in the 400–450 range.
 The chart indicates strong early growth, a massive drop, high volatility, and sharp movements that suggest potential market events requiring further review.
 ---
