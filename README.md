@@ -1,56 +1,108 @@
-# STOCK PRICE PREDICTION - S&P GLOBAL
+# STOCK PRICE PREDICTION - S\&P GLOBAL
 
-The task is to build a model to predict stock prices using the provided datasets. This classic challenge in data science requires to leverage historical data and associated market news.
+This project addresses the task of predicting stock prices by combining historical price data with market news. The objective is to develop a predictive model that demonstrates good baseline performance, while also exploring the impact of integrating heterogeneous data sources such as financial time series and textual information.
 
-## Feature Descriptions
+---
 
-### news.csv
-#### Historical News
-This dataset provides real-time news articles related to specific trading tickers. Each news article includes:
+## Project Structure
 
-- **datetime**: Timestamp of the news article's publication.
-- **ticker**: Stock ticker symbol associated with the news.
-- **headline**: Concise summary of the news article.
-- **summary**: Summarization of the article content.
+* **EDA (Exploratory Data Analysis)**
+  Initial exploration of the datasets to understand stock price behavior, distribution of returns, and volatility patterns.
+
+* **Feature Engineering**
+  Creation of price-based features such as returns, moving averages, volatility, and lagged prices, along with simple news-derived features.
+
+* **Modeling**
+  Training and evaluation of baseline and advanced models to compare performance and understand predictive drivers.
+
+* **Evaluation**
+  Quantitative and visual assessment of model accuracy, error metrics, and limitations.
+
+* **Future Improvements**
+  Suggestions to extend the project with richer features and advanced modeling techniques.
+
+---
+
+## Dataset Description
 
 ### price.csv
-#### Historical Price Data
-This dataset contains historical price and volume data for various trading tickers. For each ticker, the following information is provided:
 
-- **date**: Trading date.
-- **ticker**: Stock ticker symbol.
-- **open**: Opening price of the stock on the given date.
-- **high**: Highest price reached by the stock during the trading day.
-- **low**: Lowest price reached by the stock during the trading day.   
-- **close**: Closing price of the stock at the end of the trading day.
-- **volume**: Total number of shares traded on the given date.
+Historical stock price and volume data.
 
-### Problem Description:
-The task involves predicting stock prices based on historical data and corresponding market news. You are required to develop a predictive model from scratch that demonstrates robust performance on unseen data. This assignment will help showcase your modeling skills and your ability to synthesize different data sources in stock price prediction.
+* date: Trading date
+* ticker: Stock ticker symbol
+* open: Opening price
+* high: Highest price of the day
+* low: Lowest price of the day
+* close: Closing price
+* volume: Number of shares traded
 
+### news.csv
 
+Market news associated with stock tickers.
 
-Granularidad = nivel de detalle.
+* datetime: Publication timestamp
+* ticker: Stock ticker symbol
+* headline: Concise news title
+* summary: Short description of the article
 
-Se necesita porque precios son diarios, noticias son múltiples → hay que unificarlas.
+---
 
-Esto se alinea con la prueba porque es el paso clave de “sintetizar datos heterogéneos”.
+## Exploratory Data Analysis (EDA)
 
+### Steps performed
 
-## Results and Evaluation
+- **Price Data (price.csv):**
+    - Reviewed key columns (date, open, high, low, close, volume).
+    - Checked for duplicates and missing values (none were found).
+    - Created exploratory plots such as stock prices over time.
 
-### How much did news help?
-- Adding `news_count` to the XGBoost model **did not improve predictions**.
-- Linear Regression with price-based features alone outperformed the XGBoost model.
-- This suggests that **raw price features capture most of the predictive signal**, while a simple count of news per day is not sufficient.
+- **News Data (news.csv):**
+    - Reviewed columns (datetime, headline, summary).
+    - Counted number of news articles per day.
+    - Missing values were found in some rows.
 
-### Limitations
-- Small and simple dataset.
-- Only basic price-based features and news count used.
-- Models are simple and do not capture complex temporal or textual patterns.
+- **Merging:**
+    - Price and news datasets were merged on date.
+    - When multiple news articles were published on the same day, they were aggregated.
 
-### Future Improvements
-- Use **sentiment analysis** on news headlines/summaries.
-- Introduce **LSTM or Transformer models** to capture temporal dependencies.
-- Use **text embeddings** for richer news representation.
-- Experiment with **more sophisticated feature engineering** like volatility indexes or technical indicators.
+### Key insights
+A Stock Closing Price Over Time chart revealed the following behavior: From November 2023 to early January 2024, the stock price rose sharply, peaking close to 590. In mid-January, there was a sudden drop, followed by abrupt jumps later in the month. Since February, the price stabilized in the 400–450 range.
+The chart indicates strong early growth, a massive drop, high volatility, and sharp movements that suggest potential market events requiring further review.
+---
+
+## Feature Engineering
+
+* **Daily Return**: Percentage change in closing price from the previous day.
+* **Moving Averages (3-day and 7-day)**: Capture short- and medium-term trends.
+* **Volatility (7-day rolling)**: Identifies periods of strong price fluctuations versus stability.
+* **Lag Features**: Closing prices from previous 1 and 3 days to capture momentum effects.
+* **News Count**: Aggregated number of news articles per day, aligned with price data.
+
+---
+
+## Modeling
+
+Two models were implemented for comparison:
+
+1. **Baseline Linear Regression**
+
+   - RMSE: 13.42
+   - MAE: 4.81
+   - The linear model provides a relatively low error. This means that simple linear relationships based on historical prices are effective for this dataset.
+
+2. **XGBoost Regressor (with news_count feature)**
+
+   - RMSE: 25.03
+   - MAE: 17.61
+   - XGBoost model is much worse than the baseline. This shows that for this case, adding the news features introduces noise rather helps the prediction.
+
+The linear regression outperformed the XGBoost model. The simple news_count feature did not improve predictions, suggesting that more information is needed to explain price movements. Price-based features carried most of the predictive signal.
+
+---
+
+## Results
+
+The Linear Regression model successfully followed the overall price trend, performing well during stable periods. However, it struggled to capture sudden, sharp changes in price (e.g., around the 100-time unit mark). Despite these limitations, the baseline model demonstrated that even simple price-derived features can achieve reasonable predictive accuracy.
+
+The results show that a simple linear regression outperforms a more complex XGBoost model in this dataset. While errors remain significant in some cases, the approach demonstrates how integrating market news with price data can help capture stock dynamics.
