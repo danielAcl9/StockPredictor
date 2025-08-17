@@ -35,3 +35,22 @@ Granularidad = nivel de detalle.
 Se necesita porque precios son diarios, noticias son múltiples → hay que unificarlas.
 
 Esto se alinea con la prueba porque es el paso clave de “sintetizar datos heterogéneos”.
+
+
+## Results and Evaluation
+
+### How much did news help?
+- Adding `news_count` to the XGBoost model **did not improve predictions**.
+- Linear Regression with price-based features alone outperformed the XGBoost model.
+- This suggests that **raw price features capture most of the predictive signal**, while a simple count of news per day is not sufficient.
+
+### Limitations
+- Small and simple dataset.
+- Only basic price-based features and news count used.
+- Models are simple and do not capture complex temporal or textual patterns.
+
+### Future Improvements
+- Use **sentiment analysis** on news headlines/summaries.
+- Introduce **LSTM or Transformer models** to capture temporal dependencies.
+- Use **text embeddings** for richer news representation.
+- Experiment with **more sophisticated feature engineering** like volatility indexes or technical indicators.
